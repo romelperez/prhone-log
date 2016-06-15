@@ -1,5 +1,8 @@
 # PRHONE Log
 
+[![npm version](https://badge.fury.io/js/prhone-log.svg)](https://badge.fury.io/js/prhone-log)
+[![Build Status](https://travis-ci.org/romelperez/prhone-log.svg?branch=master)](https://travis-ci.org/romelperez/prhone-log)
+
 > Simple JavaScript logger.
 
 A simple JavaScript logger aimed for client side applications but it can be used in Node.js environments.
