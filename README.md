@@ -70,6 +70,10 @@ Logs an error level message. A required text message is required.
 
 This is an array with all messages recorded in order chronological, whether logged in console or not.
 
+### `Object Log.defaults`
+
+The default configuration. This can be overwritten and will be used as default global configuration.
+
 ## License
 
 [MIT](./LICENSE)
