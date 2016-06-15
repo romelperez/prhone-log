@@ -29,7 +29,3 @@ config/local.js
 tasks/local.js
 dump.rdb
 npm-debug.log
-
-# Built assets
-assets/css/**/.css
-assets/js/**/.js
