@@ -1,0 +1,27 @@
+{
+  "name": "prhone-log",
+  "version": "1.0.0",
+  "description": "Simple JavaScript logger",
+  "main": "lib/index.js",
+  "scripts": {
+    "test": "mocha test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/romelperez/prhone-log.git"
+  },
+  "keywords": [
+    "log",
+    "logger",
+    "prhone"
+  ],
+  "author": "Romel Pérez (romelperez.com)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/romelperez/prhone-log/issues"
+  },
+  "homepage": "https://github.com/romelperez/prhone-log#readme",
+  "devDependencies": {
+    "chai": "^3.5.0"
+  }
+}
