@@ -150,3 +150,18 @@ describe('disabled history', function () {
     assert.strictEqual(logged3Msgs.length, 11);
   });
 });
+
+describe('enabled throwErrors', function () {
+
+  var log4 = new Log('NameSpace4', {
+    throwErrors: true
+  });
+
+  it ('should throw errors when occurs', function () {
+    assert.throws(function () {
+      log4.warn('A warning message 1');
+      log4.warn('A warning message 2');
+      log4.error('An error message 1');
+    }, null, 'ERROR NameSpace4: An error message 1');
+  });
+});
