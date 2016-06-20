@@ -45,10 +45,11 @@ Creates a new logger instance.
 - `String namespace` The logger namespace or logger name.
 - `Object settings` Optional configuration to overwrite.
   - `Boolean history` If logger should keep an history. Default to `true`.
-  - `Boolean production` If only display in console error messages. Default to `false`.
+  - `Boolean production` If only display in console the error messages. Default to `false`.
   - `Boolean displayTime` If display the time in each message in console. Default to `false`.
   - `Boolean displayLevel` If display the level in each message in console. Default to `true`.
   - `Boolean displayNamespace` If display the namespace in each message in console. Default to `true`.
+  - `Boolean throwErrors` If should throw an error on error messages. Default to `false`.
 
 ### `logger.debug(String msg)`
 
@@ -69,6 +70,10 @@ Logs an error level message. A required text message is required.
 ### `Array logger.history`
 
 This is an array with all messages recorded in order chronological, whether logged in console or not.
+
+### `Object logger.settings`
+
+The settings used for the logger.
 
 ### `Object Log.defaults`
 
