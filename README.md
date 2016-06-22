@@ -40,7 +40,7 @@ logger1.error('The user machine does not support WebGL.'); // ERROR app1: The us
 
 ## API
 
-*`logger Log(String namespace[, Object settings])`*
+**`logger Log(String namespace[, Object settings])`**
 
 Creates a new logger instance.
 
@@ -61,35 +61,35 @@ Creates a new logger instance.
 | WARN  | 2      |
 | ERROR | 1      |
 
-*`logger.debug(parameters)`*
+**`logger.debug(parameters)`**
 
 Logs a debug level message. Accept multiple parameters of any type.
 
-*`logger.info(parameters)`*
+**`logger.info(parameters)`**
 
 Logs an informative level message. Accept multiple parameters of any type.
 
-*`logger.warn(parameters)`*
+**`logger.warn(parameters)`**
 
 Logs a warning level message. Accept multiple parameters of any type.
 
-*`logger.error(parameters)`*
+**`logger.error(parameters)`**
 
 Logs an error level message. Accept multiple parameters of any type.
 
-*`Array logger.history`*
+**`Array logger.history`**
 
 This is an array with all messages recorded in order chronological, whether logged in console or not.
 
-*`Object logger.settings`*
+**`Object logger.settings`**
 
 The settings used for the logger.
 
-*`Object Log.defaults`*
+**`Object Log.defaults`**
 
 The default configuration. This can be overwritten and will be used as default global configuration.
 
-*`Log.addLevel(Object level)`*
+**`Log.addLevel(Object level)`**
 
 - `Object level` - New level configuration.
   - `String level.name` - Level name.
