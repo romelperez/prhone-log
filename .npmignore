@@ -17,3 +17,4 @@ test
 .grunt
 .lock-wscript
 .travis.yml
+example.js
