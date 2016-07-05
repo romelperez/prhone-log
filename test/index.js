@@ -15,8 +15,7 @@ var loggerInterceptor = function (logger, historyLog) {
     };
   };
 
-  // @NOTE: The `log` method is creating a conflict to test.
-  // Only using the other available methods to test.
+  // @NOTE: I don't overwrite the log method to prevent collitions.
   ['info', 'debug', 'warn', 'error'].forEach(function (method) {
     inject(method);
   });
@@ -25,7 +24,8 @@ var loggerInterceptor = function (logger, historyLog) {
 
 describe('default config', function () {
 
-  var log1 = new Log('NameSpace1');
+  // Except for the colors. Later we test.
+  var log1 = new Log('NameSpace1', { colors: false });
 
   var logged1Msgs = [];
   loggerInterceptor(log1, logged1Msgs);
@@ -74,6 +74,7 @@ describe('default config', function () {
 describe('scale', function () {
 
   var log2 = new Log('NameSpace2', {
+    colors: false,
     scale: 2
   });
 
@@ -147,6 +148,7 @@ describe('scale', function () {
 describe('disabled history', function () {
 
   var log3 = new Log('NameSpace3', {
+    colors: false,
     history: false
   });
 
@@ -180,6 +182,7 @@ describe('disabled history', function () {
 describe('enabled throwErrors', function () {
 
   var log4 = new Log('NameSpace4', {
+    colors: false,
     throwErrors: true
   });
 
@@ -202,7 +205,9 @@ describe('add new method', function () {
     console: 'warn'
   });
 
-  var log5 = new Log('NameSpace5');
+  var log5 = new Log('NameSpace5', {
+    colors: false
+  });
 
   var logged5Msgs = [];
   loggerInterceptor(log5, logged5Msgs);
@@ -228,7 +233,9 @@ describe('add new method', function () {
 
 describe('multiples parameters', function () {
 
-  var log6 = new Log('NameSpace6');
+  var log6 = new Log('NameSpace6', {
+    colors: false
+  });
 
   var logged6Msgs = [];
   loggerInterceptor(log6, logged6Msgs);
@@ -253,6 +260,7 @@ describe('multiples parameters', function () {
 describe('disabled display', function () {
 
   var log7 = new Log('NameSpace7', {
+    colors: false,
     display: false
   });
 
@@ -277,6 +285,7 @@ describe('disabled display', function () {
 describe('customized display', function () {
 
   var log8 = new Log('NameSpace8', {
+    colors: false,
     displayTime: true,
     displayLevel: false
   });
@@ -296,6 +305,45 @@ describe('customized display', function () {
     ];
     for (var i=0; i<msgs.length; i++) {
       assert.match(logged5Msgs[i], msgs[i]);
+    }
+  });
+});
+
+
+describe('colors on node.js', function () {
+
+  var log9 = new Log('NameSpace9', {
+    colors: true
+  });
+
+  Log.addLevel({
+    name: 'SUCCESS',
+    method: 'success',
+    'console': 'debug',
+    color: Log.COLOR.GREEN
+  });
+
+  var logged9Msgs = [];
+  loggerInterceptor(log9, logged9Msgs);
+
+  log9.debug('no color');
+  log9.info('color 1');
+  log9.warn('color 2');
+  log9.error('color 3');
+  log9.success('color 4');
+
+  log9.__isDisabledToDebug = true;
+
+  it('display default colors', function () {
+    var msgs = [
+      'DEBUG NameSpace9: no color',
+      Log.COLOR.BLUE + 'INFO NameSpace9: color 1\u001b[0m',
+      Log.COLOR.YELLOW + 'WARN NameSpace9: color 2\u001b[0m',
+      Log.COLOR.RED + 'ERROR NameSpace9: color 3\u001b[0m',
+      Log.COLOR.GREEN + 'SUCCESS NameSpace9: color 4\u001b[0m'
+    ];
+    for (var i=0; i<msgs.length; i++) {
+      assert.equal(logged9Msgs[i], msgs[i]);
     }
   });
 });
