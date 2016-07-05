@@ -9,6 +9,8 @@ A simple JavaScript logger aimed for client side applications but it can be used
 
 Supports CommonJS and AMD. In browser it is found as `window.PrhoneLog`.
 
+See an [example](./example.js) to see it in action.
+
 ## Install
 
 ```bash
@@ -53,6 +55,7 @@ Creates a new logger instance.
   - `Boolean displayNamespace` - Display namespace. Default to `true`.
   - `Boolean throwErrors` - Throw errors on levels scale equal or below than 1. Default to `false`.
   - `Boolean history` - Keep history. Default to `true`.
+  - `Boolean colors` - Display messages with colors on node.js. Default to `true`.
 
 | Level | Scale  |
 | :---- | :----- |
@@ -85,6 +88,14 @@ This is an array with all messages recorded in order chronological, whether logg
 
 The settings used for the logger.
 
+**`Object Log.LEVEL`**
+
+All levels registered by level name. By default the four `DEBUG`, `INFO`, `WARN` and `ERROR` are registered.
+
+**`Object Log.COLOR`**
+
+List of colors to set up levels.
+
 **`Object Log.defaults`**
 
 The default configuration. This can be overwritten and will be used as default global configuration.
@@ -106,7 +117,8 @@ Log.addLevel({
   name: 'FATAL',
   scale: 0,
   method: 'fatal',
-  console: 'error'
+  console: 'error',
+  color: Log.COLOR.RED
 });
 
 const logger2 = new Log('app2');
@@ -116,6 +128,26 @@ var errMsg = 'settings file is corrupt';
 logger2.info('working properly'); // INFO app2: working properly
 logger2.fatal('The application crashed, details:', errMsg);
 // FATAL app2: The application crashed, details: settings file is corrupt
+```
+
+**`Log.setLevel(Number|Object level)`**
+
+Set an specific level as the scale of messages to display.
+
+- `Number|Object level` - The number scale to set or the reference to the level object to set.
+
+Example:
+
+```js
+const Log = require('prhone-log');
+
+const logger3 = new Log('app3');
+
+logger3.setLevel(Log.LEVEL.WARN); // is the same as: logger3.setLevel(2);
+
+logger3.warn('working properly'); // WARN app3: working properly
+logger3.info('working properly'); // not displayed
+logger3.error('working properly'); // ERROR app3: working properly
 ```
 
 ## Changelog
