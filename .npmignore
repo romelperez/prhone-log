@@ -18,3 +18,4 @@ test
 .lock-wscript
 .travis.yml
 example.js
+example.html
