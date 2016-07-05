@@ -1,0 +1,101 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>PRHONE Log</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+    <style>
+      body {
+        margin: 20px;
+        font-family: Roboto, sans-serif;
+        font-size: 2rem;
+        line-height: 1.5;
+        color: #444;
+        background-color: #fefefe;
+      }
+      h1 {
+        margin: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>PRHONE Log</h1>
+    <p>Example of use.</p>
+    <p>More info at <a href="https://www.npmjs.com/package/prhone-log" target="_blank">npmjs.org/package/prhone-log</a>.</p>
+
+    <script src="./lib/index.js"></script>
+    <script>
+      (function () {
+
+        var Log = window.PrhoneLog;
+
+        Log.addLevel({
+          name: 'COMPLETE',
+          scale: 3,
+          method: 'complete',
+          console: 'log',
+          color: Log.COLOR.GREEN
+        });
+
+        Log.addLevel({
+          name: 'DANGER',
+          scale: 2,
+          method: 'danger',
+          console: 'warn',
+          color: Log.COLOR.YELLOW
+        });
+
+        Log.addLevel({
+          name: 'FATAL',
+          scale: 0,
+          method: 'fatal',
+          console: 'error',
+          color: Log.COLOR.RED
+        });
+
+        var log1 = new Log('app1', {
+          scale: 1,
+          displayTime: true
+        });
+
+        var log2 = new Log('app2', {
+          scale: 3,
+          displayTime: true
+        });
+
+        log1.debug('message', 1);
+        log1.info('message', 2);
+        log1.complete('message', 2);
+        log1.warn('message', 3);
+        log1.danger('message', 5);
+        log1.error('message', 6);  // displayed
+        log1.fatal('message', 7);  // displayed
+
+        console.log('----------');
+
+        log2.debug('message', 8);
+        log2.info('message', 9);  // displayed
+        log2.complete('message', 10);  // displayed
+        log2.warn('message', 11);  // displayed
+        log2.danger('message', 12);  // displayed
+        log2.error('message', 13);  // displayed
+        log2.fatal('message', 14);  // displayed
+
+        console.log('----------');
+
+        log1.setLevel(2);
+
+        log1.debug('message', 15);
+        log1.info('message', 16);
+        log1.complete('message', 17);
+        log1.warn('message', 18);  // displayed
+        log1.danger('message', 19);  // displayed
+        log1.error('message', 20);  // displayed
+        log1.fatal('message', 21);  // displayed
+
+      })();
+    </script>
+  </body>
+</html>

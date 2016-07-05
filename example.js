@@ -1,17 +1,27 @@
 var Log = require('./lib');
 
 Log.addLevel({
+  name: 'COMPLETE',
+  scale: 3,
+  method: 'complete',
+  console: 'log',
+  color: Log.COLOR.GREEN
+});
+
+Log.addLevel({
   name: 'DANGER',
   scale: 2,
   method: 'danger',
-  console: 'warn'
+  console: 'warn',
+  color: Log.COLOR.YELLOW
 });
 
 Log.addLevel({
   name: 'FATAL',
   scale: 0,
   method: 'fatal',
-  console: 'error'
+  console: 'error',
+  color: Log.COLOR.RED
 });
 
 var log1 = new Log('app1', {
@@ -26,27 +36,30 @@ var log2 = new Log('app2', {
 
 log1.debug('message', 1);
 log1.info('message', 2);
+log1.complete('message', 2);
 log1.warn('message', 3);
-log1.danger('message', 4);
-log1.error('message', 5);  // displayed
-log1.fatal('message', 6);  // displayed
+log1.danger('message', 5);
+log1.error('message', 6);  // displayed
+log1.fatal('message', 7);  // displayed
 
 console.log('----------');
 
-log2.debug('message', 7);
-log2.info('message', 8);  // displayed
-log2.warn('message', 9);  // displayed
-log2.danger('message', 10);  // displayed
-log2.error('message', 11);  // displayed
-log2.fatal('message', 12);  // displayed
+log2.debug('message', 8);
+log2.info('message', 9);  // displayed
+log2.complete('message', 10);  // displayed
+log2.warn('message', 11);  // displayed
+log2.danger('message', 12);  // displayed
+log2.error('message', 13);  // displayed
+log2.fatal('message', 14);  // displayed
 
 console.log('----------');
 
 log1.setLevel(2);
 
-log1.debug('message', 13);
-log1.info('message', 14);
-log1.warn('message', 15);  // displayed
-log1.danger('message', 16);  // displayed
-log1.error('message', 17);  // displayed
-log1.fatal('message', 18);  // displayed
+log1.debug('message', 15);
+log1.info('message', 16);
+log1.complete('message', 17);
+log1.warn('message', 18);  // displayed
+log1.danger('message', 19);  // displayed
+log1.error('message', 20);  // displayed
+log1.fatal('message', 21);  // displayed
