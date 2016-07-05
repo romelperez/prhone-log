@@ -80,46 +80,62 @@ describe('scale', function () {
   var logged2Msgs = [];
   loggerInterceptor(log2, logged2Msgs);
 
-  log2.info('An information message 1');
   log2.debug('A debug message 1');
-  log2.debug('A debug message 2');
-  log2.info('An information message 2');
-  log2.debug('A debug message 3');
   log2.warn('A warning message 1');
+  log2.info('An information message 1');
   log2.error('An error message 1');
+
+  log2.setLevel(Log.LEVEL.INFO);
+
+  log2.debug('A debug message 2');
   log2.warn('A warning message 2');
-  log2.warn('A warning message 3');
+  log2.info('An information message 2');
   log2.error('An error message 2');
+
+  log2.setLevel(4);
+
+  log2.debug('A debug message 3');
+  log2.warn('A warning message 3');
   log2.info('An information message 3');
+  log2.error('An error message 3');
 
   log2.__isDisabledToDebug = true;
 
-  it('all messages should be recorded', function () {
+  it('all messages are recorded', function () {
     var msgs = [
-      'INFO NameSpace2: An information message 1',
       'DEBUG NameSpace2: A debug message 1',
-      'DEBUG NameSpace2: A debug message 2',
-      'INFO NameSpace2: An information message 2',
-      'DEBUG NameSpace2: A debug message 3',
       'WARN NameSpace2: A warning message 1',
+      'INFO NameSpace2: An information message 1',
       'ERROR NameSpace2: An error message 1',
+
+      'DEBUG NameSpace2: A debug message 2',
       'WARN NameSpace2: A warning message 2',
-      'WARN NameSpace2: A warning message 3',
+      'INFO NameSpace2: An information message 2',
       'ERROR NameSpace2: An error message 2',
-      'INFO NameSpace2: An information message 3'
+
+      'DEBUG NameSpace2: A debug message 3',
+      'WARN NameSpace2: A warning message 3',
+      'INFO NameSpace2: An information message 3',
+      'ERROR NameSpace2: An error message 3'
     ];
     for (var i=0; i<log2.history.length; i++) {
       assert.equal(log2.history[i].msg, msgs[i]);
     }
   });
 
-  it('only messages of an specified scale are displayed', function () {
+  it('only messages of an specified and changed scale are displayed', function () {
     var msgs = [
       'WARN NameSpace2: A warning message 1',
       'ERROR NameSpace2: An error message 1',
+
       'WARN NameSpace2: A warning message 2',
+      'INFO NameSpace2: An information message 2',
+      'ERROR NameSpace2: An error message 2',
+
+      'DEBUG NameSpace2: A debug message 3',
       'WARN NameSpace2: A warning message 3',
-      'ERROR NameSpace2: An error message 2'
+      'INFO NameSpace2: An information message 3',
+      'ERROR NameSpace2: An error message 3'
     ];
     for (var i=0; i<msgs.length; i++) {
       assert.equal(logged2Msgs[i], msgs[i]);
