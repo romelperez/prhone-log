@@ -34,6 +34,8 @@ var log2 = new Log('app2', {
   displayTime: true
 });
 
+console.log('----------');
+
 log1.debug('message', 1);
 log1.info('message', 2);
 log1.complete('message', 2);
@@ -63,3 +65,17 @@ log1.warn('message', 18);  // displayed
 log1.danger('message', 19);  // displayed
 log1.error('message', 20);  // displayed
 log1.fatal('message', 21);  // displayed
+
+console.log('----------');
+
+log1.setLevel(Log.LEVEL.DEBUG);
+
+log1.debug('message', 22);  // displayed
+log1.info('message', 23);  // displayed
+log1.complete('message', 24);  // displayed
+log1.warn('message', 25);  // displayed
+log1.danger('message', 26);  // displayed
+log1.error('message', 27);  // displayed
+log1.fatal('message', 28);  // displayed
+
+console.log('----------');
