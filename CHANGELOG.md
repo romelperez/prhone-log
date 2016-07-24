@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## v2.2.0 / 2016-07-23
+
+- The namespaces are enclosed in brakets.
+- The colors in Node.js only apply until the namespace.
+
 ## v2.1.0 / 2016-07-05
 
 - Added `Log.LEVEL` object
