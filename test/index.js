@@ -46,17 +46,17 @@ describe('default config', function () {
 
   it('the messages displayed must have the proper default format', function () {
     var msgs = [
-      'INFO NameSpace1: An information message 1',
-      'DEBUG NameSpace1: A debug message 1',
-      'DEBUG NameSpace1: A debug message 2',
-      'INFO NameSpace1: An information message 2',
-      'DEBUG NameSpace1: A debug message 3',
-      'WARN NameSpace1: A warning message 1',
-      'ERROR NameSpace1: An error message 1',
-      'WARN NameSpace1: A warning message 2',
-      'WARN NameSpace1: A warning message 3',
-      'ERROR NameSpace1: An error message 2',
-      'INFO NameSpace1: An information message 3'
+      'INFO [NameSpace1]: An information message 1',
+      'DEBUG [NameSpace1]: A debug message 1',
+      'DEBUG [NameSpace1]: A debug message 2',
+      'INFO [NameSpace1]: An information message 2',
+      'DEBUG [NameSpace1]: A debug message 3',
+      'WARN [NameSpace1]: A warning message 1',
+      'ERROR [NameSpace1]: An error message 1',
+      'WARN [NameSpace1]: A warning message 2',
+      'WARN [NameSpace1]: A warning message 3',
+      'ERROR [NameSpace1]: An error message 2',
+      'INFO [NameSpace1]: An information message 3'
     ];
     for (var i=0; i<msgs.length; i++) {
       assert.equal(logged1Msgs[i], msgs[i]);
@@ -104,20 +104,20 @@ describe('scale', function () {
 
   it('all messages are recorded', function () {
     var msgs = [
-      'DEBUG NameSpace2: A debug message 1',
-      'WARN NameSpace2: A warning message 1',
-      'INFO NameSpace2: An information message 1',
-      'ERROR NameSpace2: An error message 1',
+      'DEBUG [NameSpace2]: A debug message 1',
+      'WARN [NameSpace2]: A warning message 1',
+      'INFO [NameSpace2]: An information message 1',
+      'ERROR [NameSpace2]: An error message 1',
 
-      'DEBUG NameSpace2: A debug message 2',
-      'WARN NameSpace2: A warning message 2',
-      'INFO NameSpace2: An information message 2',
-      'ERROR NameSpace2: An error message 2',
+      'DEBUG [NameSpace2]: A debug message 2',
+      'WARN [NameSpace2]: A warning message 2',
+      'INFO [NameSpace2]: An information message 2',
+      'ERROR [NameSpace2]: An error message 2',
 
-      'DEBUG NameSpace2: A debug message 3',
-      'WARN NameSpace2: A warning message 3',
-      'INFO NameSpace2: An information message 3',
-      'ERROR NameSpace2: An error message 3'
+      'DEBUG [NameSpace2]: A debug message 3',
+      'WARN [NameSpace2]: A warning message 3',
+      'INFO [NameSpace2]: An information message 3',
+      'ERROR [NameSpace2]: An error message 3'
     ];
     for (var i=0; i<log2.history.length; i++) {
       assert.equal(log2.history[i].msg, msgs[i]);
@@ -126,17 +126,17 @@ describe('scale', function () {
 
   it('only messages of an specified and changed scale are displayed', function () {
     var msgs = [
-      'WARN NameSpace2: A warning message 1',
-      'ERROR NameSpace2: An error message 1',
+      'WARN [NameSpace2]: A warning message 1',
+      'ERROR [NameSpace2]: An error message 1',
 
-      'WARN NameSpace2: A warning message 2',
-      'INFO NameSpace2: An information message 2',
-      'ERROR NameSpace2: An error message 2',
+      'WARN [NameSpace2]: A warning message 2',
+      'INFO [NameSpace2]: An information message 2',
+      'ERROR [NameSpace2]: An error message 2',
 
-      'DEBUG NameSpace2: A debug message 3',
-      'WARN NameSpace2: A warning message 3',
-      'INFO NameSpace2: An information message 3',
-      'ERROR NameSpace2: An error message 3'
+      'DEBUG [NameSpace2]: A debug message 3',
+      'WARN [NameSpace2]: A warning message 3',
+      'INFO [NameSpace2]: An information message 3',
+      'ERROR [NameSpace2]: An error message 3'
     ];
     for (var i=0; i<msgs.length; i++) {
       assert.equal(logged2Msgs[i], msgs[i]);
@@ -191,7 +191,7 @@ describe('enabled throwErrors', function () {
       log4.warn('A warning message 1');
       log4.warn('A warning message 2');
       log4.error('An error message 1');
-    }, null, 'ERROR NameSpace4: An error message 1');
+    }, null, 'ERROR [NameSpace4]: An error message 1');
   });
 });
 
@@ -220,9 +220,9 @@ describe('add new method', function () {
 
   it('new method available along with the previous', function () {
     var msgs = [
-      'CUSTOM NameSpace5: A custom message 1',
-      'WARN NameSpace5: A warn message 1',
-      'CUSTOM NameSpace5: A custom message 3'
+      'CUSTOM [NameSpace5]: A custom message 1',
+      'WARN [NameSpace5]: A warn message 1',
+      'CUSTOM [NameSpace5]: A custom message 3'
     ];
     for (var i=0; i<msgs.length; i++) {
       assert.equal(logged5Msgs[i], msgs[i]);
@@ -247,8 +247,8 @@ describe('multiples parameters', function () {
 
   it('many inmutable parameters available', function () {
     var msgs = [
-      'INFO NameSpace6: Param1 -157.125 true Param2',
-      'CUSTOM NameSpace6: {"a":1,"b":"two"} {"c":true,"d":[1,2,3]}'
+      'INFO [NameSpace6]: Param1 -157.125 true Param2',
+      'CUSTOM [NameSpace6]: {"a":1,"b":"two"} {"c":true,"d":[1,2,3]}'
     ];
     for (var i=0; i<msgs.length; i++) {
       assert.equal(logged6Msgs[i], msgs[i]);
@@ -300,8 +300,8 @@ describe('customized display', function () {
 
   it('display time and namespace but not level', function () {
     var msgs = [
-      /\d\d\:\d\d\:\d\d\.\d\d\d\sNameSpace8:\sParam1\s-157\.125\strue\sParam2/,
-      /\d\d\:\d\d\:\d\d\.\d\d\d\sNameSpace8:\sSomething\sGreat!\sMore\sAmazing!/
+      /\d\d\:\d\d\:\d\d\.\d\d\d\s\[NameSpace8\]:\sParam1\s-157\.125\strue\sParam2/,
+      /\d\d\:\d\d\:\d\d\.\d\d\d\s\[NameSpace8\]:\sSomething\sGreat!\sMore\sAmazing!/
     ];
     for (var i=0; i<msgs.length; i++) {
       assert.match(logged5Msgs[i], msgs[i]);
@@ -336,11 +336,11 @@ describe('colors on node.js', function () {
 
   it('display default colors', function () {
     var msgs = [
-      'DEBUG NameSpace9: no color',
-      Log.COLOR.BLUE + 'INFO NameSpace9: color 1\u001b[0m',
-      Log.COLOR.YELLOW + 'WARN NameSpace9: color 2\u001b[0m',
-      Log.COLOR.RED + 'ERROR NameSpace9: color 3\u001b[0m',
-      Log.COLOR.GREEN + 'SUCCESS NameSpace9: color 4\u001b[0m'
+      'DEBUG [NameSpace9]: no color',
+      Log.COLOR.BLUE + 'INFO [NameSpace9]:\u001b[0m color 1',
+      Log.COLOR.YELLOW + 'WARN [NameSpace9]:\u001b[0m color 2',
+      Log.COLOR.RED + 'ERROR [NameSpace9]:\u001b[0m color 3',
+      Log.COLOR.GREEN + 'SUCCESS [NameSpace9]:\u001b[0m color 4'
     ];
     for (var i=0; i<msgs.length; i++) {
       assert.equal(logged9Msgs[i], msgs[i]);
