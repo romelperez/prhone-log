@@ -9,7 +9,7 @@ A simple JavaScript logger aimed for client side applications but it can be used
 
 Supports CommonJS and AMD. In browser it is found as `window.PrhoneLog`.
 
-See an [example](./example.js) to see it in action.
+See [example.js](./example.js) and [example.html](./example.html) for node.js and browser usage respectively.
 
 ## Install
 
@@ -22,22 +22,22 @@ npm install --save prhone-log
 ```js
 const Log = require('prhone-log');
 
-const logger1 = new Log('app1');
+const log1 = new Log('app1');
 
-logger1.info('Initializing app.'); // INFO app1: Initializing app.
-logger1.debug('Loading global configuration.'); // DEBUG app1: Loading global configuration.
-logger1.debug('Loading user configuration.'); // DEBUG app1: Loading user configuration.
-logger1.warn('The property "random" is not a number.'); // WARN app1: The property "random" is not a number.
+log1.info('Initializing app.'); // INFO [app1]: Initializing app.
+log1.debug('Loading global configuration.'); // DEBUG [app1]: Loading global configuration.
+log1.debug('Loading user configuration.'); // DEBUG [app1]: Loading user configuration.
+log1.warn('The property "random" is not a number.'); // WARN [app1]: The property "random" is not a number.
 
-logger1.info('Loading app.'); // INFO app1: Loading app.
-logger1.debug('Downloading resources.'); // DEBUG app1: Downloading resources.
-logger1.debug('Installing required libraries.'); // DEBUG app1: Installing required libraries.
-logger1.debug('Installing plugins.'); // DEBUG app1: Installing plugins.
+log1.info('Loading app.'); // INFO [app1]: Loading app.
+log1.debug('Downloading resources.'); // DEBUG [app1]: Downloading resources.
+log1.debug('Installing required libraries.'); // DEBUG [app1]: Installing required libraries.
+log1.debug('Installing plugins.'); // DEBUG [app1]: Installing plugins.
 
-logger1.info('Rendering app.'); // INFO app1: Rendering app.
-logger1.debug('Displaying main frames.'); // DEBUG app1: Displaying main frames.
-logger1.debug('Animating list.'); // DEBUG app1: Animating list.
-logger1.error('The user machine does not support WebGL.'); // ERROR app1: The user machine does not support WebGL.
+log1.info('Rendering app.'); // INFO [app1]: Rendering app.
+log1.debug('Displaying main frames.'); // DEBUG [app1]: Displaying main frames.
+log1.debug('Animating list.'); // DEBUG [app1]: Animating list.
+log1.error('The user machine does not support WebGL.'); // ERROR [app1]: The user machine does not support WebGL.
 ```
 
 ## API
@@ -121,13 +121,13 @@ Log.addLevel({
   color: Log.COLOR.RED
 });
 
-const logger2 = new Log('app2');
+const log2 = new Log('app2');
 
 var errMsg = 'settings file is corrupt';
 
-logger2.info('working properly'); // INFO app2: working properly
-logger2.fatal('The application crashed, details:', errMsg);
-// FATAL app2: The application crashed, details: settings file is corrupt
+log2.info('working properly'); // INFO [app2]: working properly
+log2.fatal('The application crashed, details:', errMsg);
+// FATAL [app2]: The application crashed, details: settings file is corrupt
 ```
 
 **`Log.setLevel(Number|Object level)`**
@@ -141,13 +141,13 @@ Example:
 ```js
 const Log = require('prhone-log');
 
-const logger3 = new Log('app3');
+const log3 = new Log('app3');
 
-logger3.setLevel(Log.LEVEL.WARN); // is the same as: logger3.setLevel(2);
+log3.setLevel(Log.LEVEL.WARN); // is the same as: log3.setLevel(2);
 
-logger3.warn('working properly'); // WARN app3: working properly
-logger3.info('working properly'); // not displayed
-logger3.error('working properly'); // ERROR app3: working properly
+log3.warn('working properly'); // WARN [app3]: working properly
+log3.info('working properly'); // not displayed
+log3.error('working properly'); // ERROR [app3]: working properly
 ```
 
 ## Changelog
