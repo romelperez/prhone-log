@@ -94,7 +94,7 @@ All levels registered by level name. By default the four `DEBUG`, `INFO`, `WARN`
 
 **`Object Log.COLOR`**
 
-List of colors to set up levels.
+List of colors to set up levels. Available colors: `RED`, `GREEN`, `YELLOW`, `BLUE`, `MAGENTA`, `CYAN`, `BLACK` and `WHITE`.
 
 **`Object Log.defaults`**
 
