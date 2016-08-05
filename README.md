@@ -5,9 +5,9 @@
 
 > Simple JavaScript logger.
 
-A simple JavaScript logger aimed for client side applications but it can be used in Node.js environments.
+A simple JavaScript logger aimed for client side applications but it can be used in other environments. Supports [CommonJS](http://www.commonjs.org) and [AMD](https://github.com/amdjs/amdjs-api). In browser it is found as `window.PrhoneLog`.
 
-Supports CommonJS and AMD. In browser it is found as `window.PrhoneLog`.
+The idea is to be able to create different loggers under different configurations with the ability to filter what to display using scales of importance.
 
 See [example.js](./example.js) and [example.html](./example.html) for node.js and browser usage respectively.
 
@@ -24,20 +24,35 @@ const Log = require('prhone-log');
 
 const log1 = new Log('app1');
 
-log1.info('Initializing app.'); // INFO [app1]: Initializing app.
-log1.debug('Loading global configuration.'); // DEBUG [app1]: Loading global configuration.
-log1.debug('Loading user configuration.'); // DEBUG [app1]: Loading user configuration.
-log1.warn('The property "random" is not a number.'); // WARN [app1]: The property "random" is not a number.
+log1.info('Initializing app');
+log1.debug('Loading global configuration');
+log1.debug('Loading user configuration');
+log1.warn('The property "random" is not a number');
+log1.info('Loading app');
+log1.debug('Downloading resources');
+log1.debug('Installing required libraries');
+log1.debug('Installing plugins');
+log1.info('Rendering app');
+log1.debug('Displaying main frames');
+log1.debug('Animating list');
+log1.error('The user machine does not support WebGL');
+```
 
-log1.info('Loading app.'); // INFO [app1]: Loading app.
-log1.debug('Downloading resources.'); // DEBUG [app1]: Downloading resources.
-log1.debug('Installing required libraries.'); // DEBUG [app1]: Installing required libraries.
-log1.debug('Installing plugins.'); // DEBUG [app1]: Installing plugins.
+...will output this:
 
-log1.info('Rendering app.'); // INFO [app1]: Rendering app.
-log1.debug('Displaying main frames.'); // DEBUG [app1]: Displaying main frames.
-log1.debug('Animating list.'); // DEBUG [app1]: Animating list.
-log1.error('The user machine does not support WebGL.'); // ERROR [app1]: The user machine does not support WebGL.
+```
+INFO [app1]: Initializing app
+DEBUG [app1]: Loading global configuration
+DEBUG [app1]: Loading user configuration
+WARN [app1]: The property "random" is not a number
+INFO [app1]: Loading app
+DEBUG [app1]: Downloading resources
+DEBUG [app1]: Installing required libraries
+DEBUG [app1]: Installing plugins
+INFO [app1]: Rendering app
+DEBUG [app1]: Displaying main frames
+DEBUG [app1]: Animating list
+ERROR [app1]: The user machine does not support WebGL
 ```
 
 ## API
@@ -123,7 +138,7 @@ Log.addLevel({
 
 const log2 = new Log('app2');
 
-var errMsg = 'settings file is corrupt';
+const errMsg = 'settings file is corrupt';
 
 log2.info('working properly'); // INFO [app2]: working properly
 log2.fatal('The application crashed, details:', errMsg);
