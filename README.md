@@ -2,6 +2,7 @@
 
 [![npm version](https://badge.fury.io/js/prhone-log.svg)](https://badge.fury.io/js/prhone-log)
 [![Build Status](https://travis-ci.org/romelperez/prhone-log.svg?branch=master)](https://travis-ci.org/romelperez/prhone-log)
+[![prhone](https://img.shields.io/badge/prhone-project-1b38a9.svg)](http://romelperez.com)
 
 > Simple JavaScript logger.
 
