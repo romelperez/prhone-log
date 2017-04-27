@@ -1,7 +1,5 @@
 language: node_js
 node_js:
-  - "4.4"
-  - "5.11"
-  - "6.2"
-before_install: npm install -g mocha
-script: mocha test
+  - "4.0"
+  - "6.0"
+script: npm test

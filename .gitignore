@@ -23,9 +23,9 @@ nbproject
 .npm
 .node_history
 .node_repl_history
+.vagrant
+.eslintcache
 
 Thumbs.db
-config/local.js
-tasks/local.js
 dump.rdb
 npm-debug.log
