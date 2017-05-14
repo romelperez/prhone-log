@@ -1,11 +1,10 @@
 {
   "name": "prhone-log",
-  "version": "2.2.3",
+  "version": "3.0.0-beta",
   "description": "Simple JavaScript logger",
-  "main": "lib/index.js",
-  "scripts": {
-    "test": "mocha test"
-  },
+  "author": "Romel Pérez (romelperez.com)",
+  "license": "MIT",
+  "homepage": "https://github.com/romelperez/prhone-log#readme",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/romelperez/prhone-log.git"
@@ -13,15 +12,17 @@
   "keywords": [
     "log",
     "logger",
+    "logging",
     "prhone"
   ],
-  "author": "Romel Pérez (romelperez.com)",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/romelperez/prhone-log/issues"
+  "main": "lib/index.js",
+  "scripts": {
+    "test": "mocha test",
+    "test:watch": "mocha test -w"
   },
-  "homepage": "https://github.com/romelperez/prhone-log#readme",
   "devDependencies": {
-    "chai": "^3.5.0"
+    "chai": "^3.5.0",
+    "mocha": "^3.2.0",
+    "sinon": "^1.17.7"
   }
 }
