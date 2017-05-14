@@ -19,6 +19,10 @@ describe('Base API', function () {
     expect(Log.addLevel).to.be.an('function');
   });
 
+  it('Class has getSettings method', function () {
+    expect(Log.getSettings).to.be.an('function');
+  });
+
   it('No valid first parameter should throw', function () {
     expect(function () {
       new Log();
@@ -39,6 +43,28 @@ describe('Base API', function () {
 
   it('Instance should have a getHistory method', function () {
     expect((new Log('app')).getHistory).to.be.an('function');
+  });
+
+  it('Instance should have a getSettings method', function () {
+    expect((new Log('app')).getSettings).to.be.an('function');
+  });
+
+  it('Default settings is defined', function () {
+    const defaults = {
+      history: true,
+      priority: 3,
+      colors: true,
+      throwErrors: false,
+      display: true,
+      displayTime: true,
+      displayLevel: true,
+      displayNamespace: true,
+    };
+    const settings = Log.getSettings();
+    expect(settings).to.be.an('object');
+    Object.keys(defaults).forEach(prop => {
+      expect(settings).to.have.property(prop, defaults[prop]);
+    });
   });
 
   it('Initial levels are set propertly', function () {
