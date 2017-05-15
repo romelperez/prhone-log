@@ -12,7 +12,7 @@ describe('Global', function () {
     console.log.restore();
   });
 
-  describe('Global update() and getSettings()', function () {
+  describe('Global getSettings() and update()', function () {
 
     it('Get settings', function () {
       const settings = Log.getSettings();
@@ -28,14 +28,16 @@ describe('Global', function () {
     it('Update global logger', function () {
 
       const settings1 = Log.getSettings();
-      expect(settings1, 'Initially colors is true').to.have.property('colors', true);
-      expect(settings1, 'Initially display is true').to.have.property('display', true);
+      expect(settings1, 'Initial colors is true').to.have.property('colors', true);
+      expect(settings1, 'Initial display is true').to.have.property('display', true);
 
       Log.update({ colors: false });
 
       const settings2 = Log.getSettings();
-      expect(settings2, 'Lastly colors is false').to.have.property('colors', false);
-      expect(settings2, 'Lastly display is true').to.have.property('display', true);
+      expect(settings2, 'Final colors is false').to.have.property('colors', false);
+      expect(settings2, 'Final display is true').to.have.property('display', true);
+
+      Log.update({ colors: true });
     });
   });
 

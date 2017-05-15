@@ -23,9 +23,15 @@ describe('Base API', function () {
     expect(Log.getSettings).to.be.an('function');
   });
 
-  it('No valid first parameter should throw', function () {
+  it('No valid first parameter should throw (1)', function () {
     expect(function () {
       new Log();
+    }).to.throws();
+  });
+
+  it('No valid first parameter should throw (2)', function () {
+    expect(function () {
+      new Log('');
     }).to.throws();
   });
 
