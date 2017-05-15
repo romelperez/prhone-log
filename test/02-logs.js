@@ -198,7 +198,68 @@ describe('Logging', function () {
   });
 
   describe('History and getHistory()', function () {
-    // TODO:
+
+    it('Logger creates history', function () {
+      const logger = new Log('app');
+      const history = logger.getHistory();
+      expect(history).to.be.an('array').to.have.length(0);
+    });
+
+    it('When logging, logs are registered by default', function () {
+      const batch = makeBatch();
+      const logger = new Log('app');
+
+      batch.forEach(({ name, msg }) => logger[name](msg));
+
+      const history = logger.getHistory();
+      expect(history).to.be.an('array').to.have.length(batch.length);
+
+      batch.forEach(({ name, msg }, index) => {
+        const item = history[index];
+        expect(item).to.be.an('object');
+        expect(item).to.have.property('level', name);
+        expect(item).to.have.property('text', msg);
+        expect(item).to.have.property('date').to.be.a('number');
+      });
+    });
+
+    it('Logs are registered with meta data', function () {
+      const logger = new Log('app');
+      const meta = { a: 1, b: true };
+      logger.debug('a message', meta);
+
+      const history = logger.getHistory();
+      const item = history[0];
+      expect(item).to.have.property('meta');
+      expect(item.meta).to.eql(meta);
+    });
+
+    it('Logs are not registered when history option is disabled', function () {
+      const batch = makeBatch();
+      const logger = new Log('app', { history: false });
+
+      batch.forEach(({ name, msg }) => logger[name](msg));
+
+      const history = logger.getHistory();
+      expect(history).to.be.an('array').to.have.length(0);
+    });
+
+    it('History is a copy of real history', function () {
+      const batch = makeBatch();
+      const logger = new Log('app', { history: false });
+
+      batch.forEach(({ name, msg }) => logger[name](msg));
+
+      const history1 = logger.getHistory();
+      const history2 = logger.getHistory();
+
+      expect(history1).to.not.equal(history2);
+      expect(history1).to.have.length(history2.length);
+
+      history1.forEach((e, index) => {
+        expect(history1[index], 'Items should not be equal').to.not.equal(history2[index]);
+      });
+    });
   });
 
   describe('Colors', function () {
