@@ -72,6 +72,7 @@ describe('Global', function () {
       Log.addLevel({ name: 'mylog', });
       const logger = new Log('app');
       expect(console.log.calledOnce).to.be.false;
+
       logger.mylog(text);
       expect(console.log.calledOnce).to.be.true;
       expect(console.log.calledWithMatch(text)).to.be.true;

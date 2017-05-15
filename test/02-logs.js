@@ -154,7 +154,47 @@ describe('Logging', function () {
   });
 
   describe('addLevel()', function () {
-    // TODO:
+
+    it('Method throws if not passed a valid object (1)', function () {
+      expect(function () {
+        const logger = new Log('app');
+        logger.addLevel();
+      }).to.throw();
+    });
+
+    it('Method throws if not passed a valid object (2)', function () {
+      expect(function () {
+        const logger = new Log('app');
+        logger.addLevel({ asd: true });
+      }).to.throw();
+    });
+
+    it('Method throws if not passed a valid object (3)', function () {
+      expect(function () {
+        const logger = new Log('app');
+        logger.addLevel({ name: '' });
+      }).to.throw();
+    });
+
+    it('Method creates a new logger method', function () {
+      const logger = new Log('app');
+      expect(logger.crazylog).to.be.undefined;
+
+      logger.addLevel({ name: 'crazylog', });
+      expect(logger.crazylog).to.be.a('function');
+    });
+
+    it('Method adds a new logger', function () {
+      const logger = new Log('app');
+      const text = 'something is great going on here!';
+
+      logger.addLevel({ name: 'crazylog', });
+      expect(console.log.calledOnce).to.be.false;
+
+      logger.crazylog(text);
+      expect(console.log.calledOnce).to.be.true;
+      expect(console.log.calledWithMatch(text)).to.be.true;
+    });
   });
 
   describe('History and getHistory()', function () {
