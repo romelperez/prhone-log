@@ -262,6 +262,47 @@ describe('Logging', function () {
     });
   });
 
+  describe('Display', function () {
+
+    it('Disabled display should not show any log', function () {
+      const logger = new Log('app', { display: false });
+      logger.debug('This is an example');
+      expect(console.log.called).to.be.false;
+    });
+
+    it('Disabled display namespace should not show namespace', function () {
+      const ns = 'mynamespace';
+      const logger = new Log(ns, { displayNamespace: false });
+      logger.debug('This is an example');
+      expect(console.log.calledWithMatch(ns)).to.be.false;
+    });
+
+    it('Disabled display time should not show time', function () {
+      const logger = new Log('app', { displayTime: false });
+      logger.debug('a message');
+      expect(console.log.calledWithMatch(/\d\d\:\d\d\:\d\d\.\d\d\d/)).to.be.false;
+    });
+
+    it('Disabled display level (method) should not show level', function () {
+      const logger = new Log('app', { displayLevel: false });
+      logger.debug('a message');
+      expect(console.log.calledWithMatch('DEBUG')).to.be.false;
+    });
+
+    it('Default log should display time, name (uppercase), namespace (in brackets) and message', function () {
+      const ns = 'mynamespace';
+      const method = 'debug';
+      const msg = 'A normal message';
+      const logger = new Log(ns);
+
+      logger[method](msg);
+      expect(console.log.calledWithMatch(/\d\d\:\d\d\:\d\d\.\d\d\d/), 'Proper time').to.be.true;
+      expect(console.log.calledWithMatch(method.toUpperCase()), 'Proper method name').to.be.true;
+      expect(console.log.calledWithMatch(`[${ns}]`), 'Proper namespace').to.be.true;
+      expect(console.log.calledWithMatch(msg), 'Proper message').to.be.true;
+    });
+  });
+
   describe('Colors', function () {
     // TODO:
   });
