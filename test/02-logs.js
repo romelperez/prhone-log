@@ -234,6 +234,16 @@ describe('Logging', function () {
       expect(item.meta).to.eql(meta);
     });
 
+    it('Logs with non-valid meta data do not save it', function () {
+      const logger = new Log('app');
+      logger.debug('message', null);
+      logger.debug('message', function () {});
+      const history = logger.getHistory();
+      history.forEach((item, index) => {
+        expect(item).to.not.have.property('meta');
+      });
+    });
+
     it('Logs are not registered when history option is disabled', function () {
       const batch = makeBatch();
       const logger = new Log('app', { history: false });
