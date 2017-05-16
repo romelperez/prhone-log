@@ -1,5 +1,3 @@
-const { expect } = require('chai');
-const sinon = require('sinon');
 const Log = require('../lib');
 
 describe('Global', function () {

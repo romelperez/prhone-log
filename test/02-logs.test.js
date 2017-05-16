@@ -1,6 +1,6 @@
-const { expect } = require('chai');
-const sinon = require('sinon');
 const Log = require('../lib');
+
+const isBrowser = new Function("try {return this===window;}catch(e){ return false;}");
 
 function makeMethodTest (name) {
   it(`Log ${name} messages`, function () {
@@ -111,7 +111,7 @@ describe('Logging', function () {
       let count = 0;
       batch.forEach(item => {
         const call = console.log.getCall(count);
-        const method = methods.find(m => m.name === item.name);
+        const method = methods.filter(m => m.name === item.name)[0];
         if (method.priority <= priority) {
           expect(call.args[0], 'expected log message').to.contain(item.msg);
           count++;
@@ -314,7 +314,57 @@ describe('Logging', function () {
   });
 
   describe('Colors', function () {
-    // TODO:
+
+    it('Color is logged properly in browser and node.js', function () {
+      const logger = new Log('app');
+      logger.info('message');
+
+      if (isBrowser()) {
+        expect(console.log.calledWithMatch(
+          /\%c\d\d\:\d\d\:\d\d\.\d\d\d INFO \[app\] \%cmessage/,
+          'color:#1565C0;',
+          'color:auto;'
+        )).to.be.true;
+      }
+      else {
+        expect(console.log.calledWithMatch(
+          /\x1b\[34m\d\d\:\d\d\:\d\d\.\d\d\d INFO \[app\]\x1b\[0m message/
+        )).to.be.true;
+      }
+    });
+
+    it('New logger with custom color is logged properly', function () {
+      const logger = new Log('app');
+      logger.addLevel({
+        name: 'love',
+        color: {
+          node: '\x1b[31m',
+          browser: 'color:#c62828;',
+        },
+      });
+      logger.love('message');
+
+      if (isBrowser()) {
+        expect(console.log.calledWithMatch(
+          /\%c\d\d\:\d\d\:\d\d\.\d\d\d LOVE \[app\] \%cmessage/,
+          'color:#c62828;',
+          'color:auto;'
+        )).to.be.true;
+      }
+      else {
+        expect(console.log.calledWithMatch(
+          /\x1b\[31m\d\d\:\d\d\:\d\d\.\d\d\d LOVE \[app\]\x1b\[0m message/
+        )).to.be.true;
+      }
+    });
+
+    it('Disabled color should log message without wrappers', function () {
+      const logger = new Log('app', { colors: false });
+      logger.info('message');
+      expect(console.log.calledWithMatch(
+        /\d\d\:\d\d\:\d\d\.\d\d\d INFO \[app\] message/
+      )).to.be.true;
+    });
   });
 
 });
