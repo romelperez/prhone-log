@@ -1,6 +1,6 @@
 {
   "name": "prhone-log",
-  "version": "3.0.0-beta",
+  "version": "3.0.0",
   "description": "Simple JavaScript logger",
   "author": "Romel Pérez (romelperez.com)",
   "license": "MIT",
