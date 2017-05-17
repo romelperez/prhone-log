@@ -151,7 +151,7 @@ Get a copy of the current logger settings.
 
 Update the current logger settings.
 
-#### **`Log.addLevel(Object level)`**
+#### **`logger.addLevel(Object level)`**
 
 Works the same way as `Log.addLevel()` method, but adds the level only to this logger.
 
