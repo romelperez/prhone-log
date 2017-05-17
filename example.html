@@ -7,17 +7,8 @@
     <title>PRHONE Log</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
     <style>
-      body {
-        margin: 20px;
-        font-family: Roboto, sans-serif;
-        font-size: 2rem;
-        line-height: 1.5;
-        color: #444;
-        background-color: #fefefe;
-      }
-      h1 {
-        margin: 0;
-      }
+      body { margin: 20px; font-family: Roboto, sans-serif; font-size: 2rem; line-height: 1.5; color: #444; background-color: #fefefe; }
+      h1 { margin: 0; }
     </style>
   </head>
   <body>
@@ -29,87 +20,34 @@
     <script>
       (function () {
 
-        var Log = window.PrhoneLog;
+        var Log = window.prhone.Log;
 
         Log.addLevel({
-          name: 'COMPLETE',
-          scale: 3,
-          method: 'complete',
-          console: 'log',
-          color: Log.COLOR.GREEN
+          name: 'awesome',
+          priority: 2,
+          color: Log.COLORS.MAGENTA
         });
 
-        Log.addLevel({
-          name: 'DANGER',
-          scale: 2,
-          method: 'danger',
-          console: 'warn',
-          color: Log.COLOR.YELLOW
-        });
+        var log1 = new Log('myapp1');
 
-        Log.addLevel({
-          name: 'FATAL',
-          scale: 0,
-          method: 'fatal',
-          console: 'error',
-          color: Log.COLOR.RED
+        var log2 = new Log('myapp2', {
+          displayTime: false,
+          priority: 1,
         });
-
-        var log1 = new Log('app1', {
-          scale: 1,
-          displayTime: true
-        });
-
-        var log2 = new Log('app2', {
-          scale: 3,
-          displayTime: true
-        });
-
-        console.log('----------');
 
         log1.debug('message', 1);
         log1.info('message', 2);
-        log1.complete('message', 2);
         log1.warn('message', 3);
-        log1.danger('message', 5);
-        log1.error('message', 6);  // displayed
-        log1.fatal('message', 7);  // displayed
+        log1.error('message', 4);
+        log1.awesome('message', 5);
 
-        console.log('----------');
+        log2.debug('message', 1);
+        log2.info('message', 2, { name: 'second', type: 'information' });
+        log2.warn('message', 3);
+        log2.error('message', 4);
+        log2.awesome('message', 5);
 
-        log2.debug('message', 8);
-        log2.info('message', 9);  // displayed
-        log2.complete('message', 10);  // displayed
-        log2.warn('message', 11);  // displayed
-        log2.danger('message', 12);  // displayed
-        log2.error('message', 13);  // displayed
-        log2.fatal('message', 14);  // displayed
-
-        console.log('----------');
-
-        log1.setLevel(2);
-
-        log1.debug('message', 15);
-        log1.info('message', 16);
-        log1.complete('message', 17);
-        log1.warn('message', 18);  // displayed
-        log1.danger('message', 19);  // displayed
-        log1.error('message', 20);  // displayed
-        log1.fatal('message', 21);  // displayed
-
-        console.log('----------');
-
-        log1.setLevel(Log.LEVEL.DEBUG);
-
-        log1.debug('message', 22);  // displayed
-        log1.info('message', 23);  // displayed
-        log1.complete('message', 24);  // displayed
-        log1.warn('message', 25);  // displayed
-        log1.danger('message', 26);  // displayed
-        log1.error('message', 27);  // displayed
-        log1.fatal('message', 28);  // displayed
-
-        console.log('----------');
+        console.log(log2.getHistory());
 
       })();
     </script>
