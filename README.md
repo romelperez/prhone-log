@@ -6,13 +6,13 @@
 
 > Simple JavaScript logger.
 
-A simple JavaScript logger for client side applications but it can be used in other environments. Supports [CommonJS](http://www.commonjs.org), [AMD](https://github.com/amdjs/amdjs-api) and CDN.
+A simple JavaScript logger for client side applications but it can be used in other environments. Supports [CommonJS](http://www.commonjs.org), [AMD](https://github.com/amdjs/amdjs-api) and standalone.
 
 See [example.html](https://github.com/romelperez/prhone-log/blob/master/example.html) and [example.js](https://github.com/romelperez/prhone-log/blob/master/example.js) for browser and node.js usage respectively.
 
 ## Install
 
-Webpack, browserify and Node.js:
+Webpack, Browserify and Node.js:
 
 ```bash
 npm install prhone-log
